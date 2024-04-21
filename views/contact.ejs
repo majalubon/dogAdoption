@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Adoption</title>
+    <link rel="stylesheet"  type="text/css" href="http://localhost:8000/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <h1><%=webName%></h1>
+    <a href="weather">
+      <div class="weather-icon">
+          <i class="fas fa-sun"></i>
+      </div>
+    </a>
+    <div class="user-icon">
+      <a href="/login">
+          <i class="fas fa-user"></i>
+      </a>
+      
+      <% if (loggedIn) { %>
+        <a href="/logout"></a>
+      <% } else { %>
+          <a href="/login"></a>
+      <% } %>
+    </div>
+    <div class="topnav">
+    <a href="/">HOME</a>
+    <div class="dropdown">
+        <button class="dropbtn">
+          MEET OUR DOGS
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/adoptdog">Dogs for adoption</a>
+          <a href="/fosterdog">Dogs for fostering</a>
+        </div>
+    </div>
+    <a href="adoption">ADOPTION</a>
+    <a href="fostering">FOSTERING</a>
+    <a href="posts">OUR POSTS</a>
+      <% if (loggedIn) { %>
+        <a href="/queries">QUERIES</a>
+      <% } else { %>
+          <a href="/contact">CONTACT US</a>
+      <% } %>
+      <% if (loggedIn) { %>
+          <a href="/addDog">ADD DOG</a>
+      <% } %>
+    <!-- Search Bar-->
+      <div class="dropdown">
+        <button class="dropbtn">
+          SEARCH
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <form action="/search-result" method="get">
+            <input type="text" name="keyword" placeholder="Search..." />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  
+  <h2>Contact Us</h2>
+  <div class="signbg">
+    <div class="signup-box">
+
+    <form method="POST" action="/submit"  >
+      <div class="container">
+        <label for="first_name"><b>First Name:</b></label>
+        <input id="first_name" type="text" name="first_name" required/>
+    
+        <label for="last_name"><b>Last Name:</b></label>
+        <input id="last_name" type="text" name="last_name" required/>
+    
+        <label for="email"><b>Email Address:</b></label>
+        <input id="email" type="text" name="email" required/>
+    
+        <label for="reason"><b>Select a Reason:</b></label>
+        <select id="reason" name="reason" required onchange="toggleFields()">
+          <option value="">Select Reason</option>
+          <option value="adoption">Interested in adoption</option>
+          <option value="fostering">Interested in fostering</option>
+          <option value="question">Other Query</option>
+        </select>
+    
+        <div id="dogFields" style="display:none;">
+          <label for="dog"><b>Dog Interested in:</b></label>
+          <input id="dog" type="text" name="dog"/>
+        </div>
+    
+        <div id="queryField" style="display:block;">
+          <label for="query"><b>Query:</b></label>
+          <input id="query" type="text" name="query">
+        </div>
+    
+        <button type="submit" value="Add query" class="registerbtn">Submit</button>
+      </div>
+    </form>
+    
+    <script>
+      function toggleFields() {
+        var reasonSelect = document.getElementById("reason");
+        var dogFields = document.getElementById("dogFields");
+        var queryField = document.getElementById("queryField");
+    
+        if (reasonSelect.value === "adoption" || reasonSelect.value === "fostering") {
+          dogFields.style.display = "block";
+          queryField.style.display = "none";
+        } else {
+          dogFields.style.display = "none";
+          queryField.style.display = "block";
+        }
+      }
+    </script>
+  </div>
+  </body>
+</html>

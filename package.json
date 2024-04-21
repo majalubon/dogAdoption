@@ -1,0 +1,25 @@
+{
+  "name": "dogadoption",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express-sanitizer": "^1.0.6",
+    "express-validator": "^7.0.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jest": "^29.7.0",
+    "mocha": "^10.4.0",
+    "supertest": "^6.3.4"
+  }
+}

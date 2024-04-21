@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Adoption</title>
+    <link rel="stylesheet"  type="text/css" href="main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <h1>Dog Adoption and Fostering</h1>
+    <a href="weather">
+      <div class="weather-icon">
+          <i class="fas fa-sun"></i>
+      </div>
+    </a>
+    <div class="user-icon">
+      <a href="/login">
+          <i class="fas fa-user"></i>
+      </a>
+      
+      <% if (loggedIn) { %>
+        <a href="/logout"></a>
+      <% } else { %>
+          <a href="/login"></a>
+      <% } %>
+    </div>
+    <div class="topnav">
+    <a href="/">HOME</a>
+    <div class="dropdown">
+        <button class="dropbtn">
+          MEET OUR DOGS
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/adoptdog">Dogs for adoption</a>
+          <a href="/fosterdog">Dogs for fostering</a>
+        </div>
+    </div>
+    <a href="adoption">ADOPTION</a>
+    <a href="fostering">FOSTERING</a>
+    <a href="posts">OUR POSTS</a>
+      <% if (loggedIn) { %>
+        <a href="/queries">QUERIES</a>
+      <% } else { %>
+          <a href="/contact">CONTACT US</a>
+      <% } %>
+      <% if (loggedIn) { %>
+          <a href="/addDog">ADD DOG</a>
+      <% } %>
+    <!-- Search Bar-->
+      <div class="dropdown">
+        <button class="dropbtn">
+          SEARCH
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <form action="/search-result" method="get">
+            <input type="text" name="keyword" placeholder="Search..." />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  <h2>Welcome to Dog Adoption and Fostering </h2>
+  <div class="image-container">
+    <img src="/images/main_dog.jpg" alt="Main page dog">
+    <div class="about-us-overlay">
+      <h2>About Us</h2>
+      <p>We believe every dog deserves a chance
+        <br> no matter how long it takes.
+        <br>We work with small, local animal
+        <br> shelters and fosters to help raise awareness
+        <br> for the dogs that they have.
+        <br>We make sure that all the shelters we 
+        <br> work with are no kill shelters.
+        <br> In big shelters there is a quick turnover and
+        <br> dogs are put down too quickly we rescue these 
+        <br> dogs and give them a better chance with us.
+      </p>
+    </div>
+  </div>
+  </div>
+  <div class="img-container">
+    <h1>Available Dogs for Adoption</h1>
+  
+    <div class="dog-images-container">
+      <% availableDogs.slice(0, 3).forEach(dog => { %>
+        <!-- Anchor tag around the image for hover effect -->
+        <a href="/dogs/<%= dog.id %>" class="dog-link">
+          <!-- Dog image with hover effect -->
+          <img src="/<%= dog.image_path %>" alt="<%= dog.name %> Image" class="dog-image">
+        </a>
+      <% }) %>
+    </div>
+  </div>
+
+  </body>
+</html>

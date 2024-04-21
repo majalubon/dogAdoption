@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Adoption</title>
+    <link rel="stylesheet"  type="text/css" href="http://localhost:8000/main.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <h1>Dog adoption and Fostering</h1>
+    <a href="weather">
+      <div class="weather-icon">
+          <i class="fas fa-sun"></i>
+      </div>
+    </a>
+    <div class="user-icon">
+      <a href="/login">
+          <i class="fas fa-user"></i>
+      </a>
+      
+      <% if (loggedIn) { %>
+        <a href="/logout"></a>
+      <% } else { %>
+          <a href="/login"></a>
+      <% } %>
+    </div>
+    <div class="topnav">
+      <a href="/">HOME</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          MEET OUR DOGS
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/adoptdog">Dogs for adoption</a>
+          <a href="/fosterdog">Dogs for fostering</a>
+        </div>
+      </div>
+
+      <a href="adoption">ADOPTION</a>
+      <a href="fostering">FOSTERING</a>
+      <a href="posts">OUR POSTS</a>
+        <% if (loggedIn) { %>
+          <a href="/queries">QUERIES</a>
+        <% } else { %>
+            <a href="/contact">CONTACT US</a>
+        <% } %>
+
+        <% if (loggedIn) { %>
+            <a href="/addDog">ADD DOG</a>
+        <% } %>
+      <!-- Search Bar-->
+      <div class="dropdown">
+        <button class="dropbtn">
+          SEARCH
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <form action="/search-result" method="get">
+            <input type="text" name="keyword" placeholder="Search..." />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  <h2>Add dog for adoption or fostering</h2>
+  <div class="signbg">
+    <div class="signup-box">
+    <form method="POST" action="/dogadded" enctype="multipart/form-data">
+      <div class="container">
+        <label for="name"><b>Name:</b></label>
+        <input id="name" type="text" name="name"  required/>
+
+        <label for="breed"><b>Breed:</b></label>
+        <input id="breed" type="text" name="breed" required/>
+
+        <label for="age"><b>Age:</b></label>
+        <input id="age" type="text" name="age"  required/>
+
+        <label for="image"><b>Image:</b></label>
+        <input id="image" type="file" name="image" accept="image/*" required/>
+
+        <label for="description"><b>Description:</b></label>
+        <input id="description" type="text" name="description" required/>
+
+        <label for="location"><b>Location:</b></label>
+        <input id="location" type="text" name="location" required/>
+
+        <label for="question"><b>Is the dog available for adoption, fostering or both?</b></label>
+
+        <label for="adopt"><b>Adoption</b></label>
+        <input id="adopt" type="checkbox" name="adopt" value="true" />
+
+        <label for="foster"><b>Fostering</b></label>
+        <input id="foster" type="checkbox" name="foster" value="true"/>
+        <br>
+
+        <button type="submit" value="Add item" class="registerbtn">Submit</button>
+      </form>
+  </body>
+</html>

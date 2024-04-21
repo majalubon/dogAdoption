@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Adoption</title>
+    <link rel="stylesheet"  type="text/css" href="main.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <h1>Dog Adoption and Fostering</h1>
+    <a href="weather">
+      <div class="weather-icon">
+          <i class="fas fa-sun"></i>
+      </div>
+    </a>
+    <div class="user-icon">
+      <a href="/login">
+          <i class="fas fa-user"></i>
+      </a>
+      
+      <% if (loggedIn) { %>
+        <a href="/logout"></a>
+      <% } else { %>
+          <a href="/login"></a>
+      <% } %>
+    </div>
+    <div class="topnav">
+    <a href="/">HOME</a>
+    <div class="dropdown">
+        <button class="dropbtn">
+          MEET OUR DOGS
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/adoptdog">Dogs for adoption</a>
+          <a href="/fosterdog">Dogs for fostering</a>
+        </div>
+    </div>
+
+    <a href="adoption">ADOPTION</a>
+    <a href="fostering">FOSTERING</a>
+    <a href="posts">OUR POSTS</a>
+      <% if (loggedIn) { %>
+        <a href="/queries">QUERIES</a>
+      <% } else { %>
+          <a href="/contact">CONTACT US</a>
+      <% } %>
+      <% if (loggedIn) { %>
+          <a href="/addDog">ADD DOG</a>
+      <% } %>
+    <!-- Search Bar-->
+      <div class="dropdown">
+        <button class="dropbtn">
+          SEARCH
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <form action="/search-result" method="get">
+            <input type="text" name="keyword" placeholder="Search..." />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  <h2>Dogs available for adoption</h2>
+  <p>List of our dogs:</p>
+  <ul class="dog-list">
+    <% for (let i = 0; i < availableDogs.length; i++) { %>
+      <li>
+        <h3><%= availableDogs[i].name %></h3>
+        <a href="/dogs/<%= availableDogs[i].id %>">
+          <div class="dog-info">
+            <% if (availableDogs[i].image_path) { %>
+              <img src="/<%= availableDogs[i].image_path %>" alt="<%= availableDogs[i].name %> Image">
+            <% } else { %>
+              <p>No image available</p>
+            <% } %>
+          </div>
+        </a>
+      </li>
+    <% } %>
+  </ul>
+  </body>
+</html>

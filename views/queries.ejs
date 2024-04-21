@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Adoption</title>
+    <link rel="stylesheet"  type="text/css" href="http://localhost:8000/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <h1>Dog Adoption and Fostering</h1>
+    <a href="weather">
+      <div class="weather-icon">
+          <i class="fas fa-sun"></i>
+      </div>
+    </a>
+    <div class="user-icon">
+      <a href="/login">
+          <i class="fas fa-user"></i>
+      </a>
+      
+      <% if (loggedIn) { %>
+        <a href="/logout"></a>
+      <% } else { %>
+          <a href="/login"></a>
+      <% } %>
+    </div>
+    <div class="topnav">
+    <a href="/">HOME</a>
+    <div class="dropdown">
+        <button class="dropbtn">
+          MEET OUR DOGS
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/adoptdog">Dogs for adoption</a>
+          <a href="/fosterdog">Dogs for fostering</a>
+        </div>
+    </div>
+    <a href="adoption">ADOPTION</a>
+    <a href="fostering">FOSTERING</a>
+    <a href="posts">OUR POSTS</a>
+      <% if (loggedIn) { %>
+        <a href="/queries">QUERIES</a>
+      <% } else { %>
+          <a href="/contact">CONTACT US</a>
+      <% } %>
+      <% if (loggedIn) { %>
+          <a href="/addDog">ADD DOG</a>
+      <% } %>
+    <!-- Search Bar-->
+      <div class="dropdown">
+        <button class="dropbtn">
+          SEARCH
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <form action="/search-result" method="get">
+            <input type="text" name="keyword" placeholder="Search..." />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+  </div>
+  
+  <h2>Admin Queries</h2>
+  <div class="admin-queries-container">
+  <ul>
+      <% queries.forEach(query => { %>
+          <li>
+              <div class="query-container">
+                  <div class="query-details">
+                      <p><strong>Name:</strong> <%= query.first_name %> <%= query.last_name %></p>
+                      <p><strong>Email:</strong> <%= query.email %></p>
+                      <% if (query.reason === 'adoption') { %>
+                          <p><strong>Reason:</strong> Adoption</p>
+                          <p><strong>Dog Interested in:</strong> <%= query.dog %></p>
+                      <% } else if (query.reason === 'fostering') { %>
+                          <p><strong>Reason:</strong> Fostering</p>
+                          <p><strong>Dog Interested in:</strong> <%= query.dog %></p>
+                      <% } else if (query.reason === 'question') { %>
+                          <p><strong>Reason:</strong> Question</p>
+                          <p><strong>Query:</strong> <%= query.query %></p>
+                      <% } %>
+                      <p><strong>Status:</strong> <%= query.status %></p>
+                      <p><strong>Comments:</strong><%= query.comments %></p>
+                  </div>
+                  <div class="update-form">
+                    <% if (loggedIn) { %>
+                        <button class="submitbtn" onclick="toggleUpdateForm()">Update Query</button>
+                        <div id="updateFormContainer" style="display: none;">
+                            <form action="/updateQuery" method="post" class="update-form">
+                                <input type="hidden" name="queryId" value="<%= query.id %>">
+                                <label for="status">Status:</label>
+                                <select name="status" class="edit-input">
+                                    <option value="Pending" <%= query.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="In Progress" <%= query.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
+                                    <option value="Resolved" <%= query.status === 'Resolved' ? 'selected' : '' %>>Resolved</option>
+                                </select>
+                                <br>
+                                <label for="comments">Comments:</label>
+                                <textarea name="comments" rows="4" cols="50" class="edit-input"><%= query.comments %></textarea>
+                                <br>
+                                <button type="submit" class="submitbtn">Update</button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+          </li>
+      <% }); %>
+  </ul>
+  </div>
+  <script>
+      function toggleUpdateForm() {
+          var formContainer = document.getElementById("updateFormContainer");
+          if (formContainer.style.display === "none") {
+              formContainer.style.display = "block";
+          } else {
+              formContainer.style.display = "none";
+          }
+      }
+  </script>
+
+  </body>
+</html>

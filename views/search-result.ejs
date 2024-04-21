@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dog Adoption</title>
+    <link rel="stylesheet"  type="text/css" href="main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <h1>Dog Adoption and Fostering</h1>
+    <a href="weather">
+      <div class="weather-icon">
+          <i class="fas fa-sun"></i>
+      </div>
+    </a>
+    <div class="user-icon">
+      <a href="/login">
+          <i class="fas fa-user"></i>
+      </a>
+      
+      <% if (loggedIn) { %>
+        <a href="/logout"></a>
+      <% } else { %>
+          <a href="/login"></a>
+      <% } %>
+    </div>
+    <div class="topnav">
+    <a href="/">HOME</a>
+    <div class="dropdown">
+        <button class="dropbtn">
+          MEET OUR DOGS
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/adoptdog">Dogs for adoption</a>
+          <a href="/fosterdog">Dogs for fostering</a>
+        </div>
+    </div>
+    <a href="adoption">ADOPTION</a>
+    <a href="fostering">FOSTERING</a>
+    <a href="posts">OUR POSTS</a>
+      <% if (loggedIn) { %>
+        <a href="/queries">QUERIES</a>
+      <% } else { %>
+          <a href="/contact">CONTACT US</a>
+      <% } %>
+      <% if (loggedIn) { %>
+          <a href="/addDog">ADD DOG</a>
+      <% } %>
+    <!-- Search Bar-->
+      <div class="dropdown">
+        <button class="dropbtn">
+          SEARCH
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <form action="/search-result" method="get">
+            <input type="text" name="keyword" placeholder="Search..." />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+      </div>
+  </div>
+    <h2>Search Result:</h2>
+    <ul>
+      <% for (let i = 0; i < availableDogs.length; i++) { %>
+        <li>
+          <h3><%= availableDogs[i].name %></h3>
+          <p><%= availableDogs[i].breed %></p>
+          <p><%= availableDogs[i].age %></p>
+          <!-- Display image if available -->
+          <% if (availableDogs[i].image_path) { %>
+            <img src="/<%= availableDogs[i].image_path %>" alt="<%= availableDogs[i].name %> Image" width="200">
+            <% console.log(availableDogs[i].image_path); %>
+          <% } else { %>
+            <p>No image available</p>
+          <% } %>
+          <p><%= availableDogs[i].description %></p>
+          <p><%= availableDogs[i].location %></p>
+          <p><%= availableDogs[i].adopt %></p>
+          <p><%= availableDogs[i].foster %></p>
+          <!-- <form method="POST" action="/addToBasket">
+            <input type="hidden" name="name" value="<%= availableDogs[i].name %>">
+            <input type="hidden" name="brand" value="<%= availableDogs[i].brand %>">
+            <input type="hidden" name="size" value="<%= availableDogs[i].size %>">
+            <input type="hidden" name="price" value="<%= availableDogs[i].price %>">
+            <input type="hidden" name="image" value="/<%= availableDogs[i].image_path %>">
+            <button type="submit" class="registerbtn">Add to Basket</button>
+          </form> -->
+        </li>
+        <br/>
+      <% } %>
+    </ul>
+  </body>
+</html>
