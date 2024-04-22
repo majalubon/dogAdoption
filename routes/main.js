@@ -203,10 +203,7 @@ module.exports = function(app, webData) {
         const dataWithLoggedIn = { ...webData, loggedIn: req.session.loggedIn };
         res.render("search.ejs", dataWithLoggedIn);
     });
-   // app.get('/search-result', function (req, res) {
-        //searching in the database
-      //  res.send("You searched for: " + req.query.keyword);
-  //  });
+
     app.get('/register', function (req,res) {
         const dataWithLoggedIn = { ...webData, loggedIn: req.session.loggedIn };
         res.render("register.ejs", dataWithLoggedIn);                                                                     
@@ -223,7 +220,7 @@ module.exports = function(app, webData) {
         // Check for validation errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
+            return res.status(400).json({ errors: errors.array() });
         }
         const sanitizedUsername = req.sanitize(req.body.username);
         const sanitizedFirst = req.sanitize(req.body.first);
@@ -319,6 +316,11 @@ module.exports = function(app, webData) {
     });  
     
     app.post('/dogadded', upload.single('image'), function (req, res) {
+        if (!req.session.loggedIn) {
+            // If not authenticated, redirect to login page
+            return res.redirect('/login');
+        }
+    
         const imagePath = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
         const userId = req.session.userId; 
     
@@ -362,6 +364,11 @@ module.exports = function(app, webData) {
     });
 
     app.post('/postadded', upload.single('image'), function (req, res) {
+        if (!req.session.loggedIn) {
+            // If not authenticated, redirect to login page
+            return res.redirect('/login');
+        }
+    
         const imagePath = req.file ? req.file.path.replace(/\\/g, '/').replace('public/', '') : null;
         const userId = req.session.userId;
     
