@@ -88,15 +88,15 @@ module.exports = function(app, webData) {
         db.query(sqlquery, (err, result) => {
           if (err) {
             console.error('Error retrieving dogs:', err);
-            // Instead of 500 Internal Server Error, respond with 200 OK and an error message
+
             return res.status(200).send('Error retrieving dogs. Please try again.'); 
           }
       
           const newData = {
             webData,
             availableDogs: result,
-            selectedDogs: [], // Assuming selectedDogs is defined elsewhere
-            loggedIn: req.session.loggedIn  // You can keep this if you need it for rendering purposes
+            selectedDogs: [], 
+            loggedIn: req.session.loggedIn  
           };
       
           res.render('index.ejs', newData);
@@ -117,7 +117,7 @@ module.exports = function(app, webData) {
 
 
     app.get('/adoptdog', function(req, res) {
-        let sqlquery = "SELECT * FROM dogs WHERE adopt = 1"; // Filter dogs with adopt = true
+        let sqlquery = "SELECT * FROM dogs WHERE adopt = 1"; 
         db.query(sqlquery, (err, result) => {
             if (err) {
                 console.error('Error retrieving dogs:', err);
@@ -138,7 +138,7 @@ module.exports = function(app, webData) {
     });
 
     app.get('/fosterdog', function(req, res) {
-        let sqlquery = "SELECT * FROM dogs WHERE foster = 1"; // Filter dogs with foster = true
+        let sqlquery = "SELECT * FROM dogs WHERE foster = 1"; 
         db.query(sqlquery, (err, result) => {
             if (err) {
                 console.error('Error retrieving dogs:', err);
@@ -318,7 +318,6 @@ module.exports = function(app, webData) {
     
     app.post('/dogadded', upload.single('image'), function (req, res) {
         if (!req.session.loggedIn) {
-            // If not authenticated, redirect to login page
             return res.redirect('/login');
         }
     
@@ -467,7 +466,6 @@ module.exports = function(app, webData) {
     
             const dog = result[0];
     
-            // Define imagePath based on dog's image_path (replace 'public/' if present)
             const imagePath = dog.image_path ? dog.image_path.replace(/\\/g, '/').replace('public/', '') : null;
         
     
