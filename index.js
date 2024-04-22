@@ -57,7 +57,7 @@ app.engine('html', ejs.renderFile);
 var webData = {webName: "Dog Adoption and Fostering"}
 
 // Requires the main.js file inside the routes folder passing in the Express app and data as arguments.  All the routes will go in this file
-require("./routes/main")(app, webData);
+require("./dogAdoption/routes/main")(app, webData);
 
 // Start the web app listening
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
