@@ -286,7 +286,8 @@ module.exports = function(app, webData) {
                         // Redirect to the basket
                         res.redirect('/');
                     } else {
-                        res.status(401).send('Incorrect password.');
+                        const dataWithLoggedIn = { ...webData, loggedIn: req.session.loggedIn, error: 'Incorrect password.' };
+                        res.render('login', dataWithLoggedIn);
                     }
                 });
             }

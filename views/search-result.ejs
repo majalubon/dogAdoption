@@ -61,34 +61,20 @@
       </div>
   </div>
     <h2>Search Result:</h2>
-    <ul>
+    <ul class="dog-list">
       <% for (let i = 0; i < availableDogs.length; i++) { %>
         <li>
           <h3><%= availableDogs[i].name %></h3>
-          <p><%= availableDogs[i].breed %></p>
-          <p><%= availableDogs[i].age %></p>
-          <!-- Display image if available -->
-          <% if (availableDogs[i].image_path) { %>
-            <img src="/<%= availableDogs[i].image_path %>" alt="<%= availableDogs[i].name %> Image" width="200">
-            <% console.log(availableDogs[i].image_path); %>
-          <% } else { %>
-            <p>No image available</p>
-          <% } %>
-          <p><%= availableDogs[i].description %></p>
-          <p><%= availableDogs[i].location %></p>
-          <p><%= availableDogs[i].adopt %></p>
-          <p><%= availableDogs[i].foster %></p>
-          <!-- <form method="POST" action="/addToBasket">
-            <input type="hidden" name="name" value="<%= availableDogs[i].name %>">
-            <input type="hidden" name="brand" value="<%= availableDogs[i].brand %>">
-            <input type="hidden" name="size" value="<%= availableDogs[i].size %>">
-            <input type="hidden" name="price" value="<%= availableDogs[i].price %>">
-            <input type="hidden" name="image" value="/<%= availableDogs[i].image_path %>">
-            <button type="submit" class="registerbtn">Add to Basket</button>
-          </form> -->
+          <a href="/dogs/<%= availableDogs[i].id %>">
+            <div class="dog-info">
+              <% if (availableDogs[i].image_path) { %>
+                <img src="/<%= availableDogs[i].image_path %>" alt="<%= availableDogs[i].name %> Image">
+              <% } else { %>
+                <p>No image available</p>
+              <% } %>
+            </div>
+          </a>
         </li>
-        <br/>
       <% } %>
-    </ul>
   </body>
 </html>

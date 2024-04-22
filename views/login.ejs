@@ -61,6 +61,11 @@
       </div>
   </div>
   <h2>Admin Area</h2>
+  <% if (typeof error !== 'undefined') { %>
+    <div class="error-message">
+        <p><%= error %> Please try again.</p>
+    </div>
+  <% } %>
   <div class="loginbg">
     <div class="login-box">
     <form method="POST" action="/loggedin">
